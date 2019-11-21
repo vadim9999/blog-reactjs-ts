@@ -17,7 +17,7 @@ function Home() {
     <div>
       <Provider store={store}>
       <Posts compiler="Hey"/>
-      <Link href="/post?slug=12" >go to post 2</Link>
+      <Link href="/post?slug=133" >go to post 2</Link>
       </Provider>
       
       

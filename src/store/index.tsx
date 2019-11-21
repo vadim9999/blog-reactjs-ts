@@ -6,6 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const initialiseSagaMiddleware = createSagaMiddleware();
+console.log("Init store*****");
 
 const store = createStore(
     rootReducer,
