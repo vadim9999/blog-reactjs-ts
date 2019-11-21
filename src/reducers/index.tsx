@@ -4,7 +4,9 @@ const initialState = {
 }
 
 const rootReducer = (state :object = initialState, action:any) :object =>{
-    if(action === "GET_POSTS"){
+    if(action.type === "GET_POSTS_SUCCESS"){
+        console.log("GETPostssuccess", action);
+        
         return {
             ...state,
             posts: [...action.payload]
