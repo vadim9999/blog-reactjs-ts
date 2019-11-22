@@ -1,7 +1,8 @@
 
 const initialState = {
     posts: [],
-    currentPost:{}
+    currentPost:{},
+    createdPostId:-1
 }
 
 const rootReducer = (state :object = initialState, 
@@ -24,6 +25,11 @@ const rootReducer = (state :object = initialState,
             return {
                 ...state,
                 currentPost: {...payload} 
+            }
+        case "ADD_POST_SUCCESS":
+            return{
+                ...state,
+                createdPostId: payload
             }
         default: 
             return state;

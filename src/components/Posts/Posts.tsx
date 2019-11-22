@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {getPosts} from "../../actions"
 import Link from 'next/link'
+// import NewPost from "../NewPost/NewPost"
 // import axios from "axios"
 interface HelloProps {compiler: string;
     framework?: number; 
@@ -65,12 +66,14 @@ class connectedHello extends React.Component<HelloProps,HelloState> {
         
     // }
     // using arrow functions you don't need to bind function to this class 
-    onClick = ()=>{
+    componentDidMount = () =>{
         this.props.getPosts()
+    }
+
+    onClick = ()=>{
         
-        this.setState({
-            name: "OKK"
-        })
+        
+        
     }
     render(){
 
@@ -84,12 +87,13 @@ class connectedHello extends React.Component<HelloProps,HelloState> {
         console.log(posts);
         
         return(<h1>
+            <Link href="/posts/new"><button onClick = {this.onClick}>Hi</button></Link>
             <ul>
                 {posts !=undefined && posts.length >0 ? posts.map((post) =>{
                     return (<li> <Link href={`/post?id=${post.id}`} ><a>{post.title}</a></Link></li>)
                 }): "No data"}
             </ul>
-            <button onClick = {this.onClick}>Hi</button>
+            
             Hello from {this.props.compiler} and {this.props.framework}  
             </h1>)
     }

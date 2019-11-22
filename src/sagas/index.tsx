@@ -1,9 +1,32 @@
 import {takeEvery, put, call} from "redux-saga/effects"
 import axios from "axios"
-const URL = "https://simple-blog-api.crew.red/"
+const URL = "https://simple-blog-api.crew.red"
+
 export default function* watcherSaga(){
     yield takeEvery("GET_POSTS", getPostsWorker)
     yield takeEvery("GET_POST_BY_ID",getPostByIdWorker)
+    yield takeEvery("ADD_POST", addPostWorker)
+}
+
+function* addPostWorker (action:{type:string, payload:{title:string, body:string}}) {
+    try{
+        const result:any = yield call(addPost,action.payload)
+        yield console.log(result);
+        yield put({type:`${action.type}_SUCCESS`, payload:result.data.id})
+        // yield put({type:'GET_POSTS'})
+        // yield put({type:"GET_POST_BY_ID",payload:result.data.id})
+
+    }catch(e){
+        yield put({type:`${action.type}_FAIL`})
+    }
+}
+
+const addPost = (post: {title:string, body:string}) =>{
+    console.log(post);
+    
+    return axios.post(`${URL}/posts`,{
+        ...post
+    })
 }
 
 function* getPostByIdWorker(action:{type:string,payload: number}){
@@ -19,7 +42,7 @@ function* getPostByIdWorker(action:{type:string,payload: number}){
 }
 
 const getPostById = (id:number):any =>{
-    return axios.get(`${URL}posts/${id}`,{
+    return axios.get(`${URL}/posts/${id}`,{
         params:{
             '_embed':'comments'
         }
@@ -39,7 +62,7 @@ function* getPostsWorker(){
 
 const getPosts = ():any => {
     console.log("getPosts", );
-    return axios.get(URL + 'posts')
+    return axios.get(URL + '/posts')
         
     // console.log(data);
     

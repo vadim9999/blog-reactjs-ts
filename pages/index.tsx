@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import store from "../src/store"
 import Link from 'next/link'
 
+
 function my() :void{
   console.log("hi");
   

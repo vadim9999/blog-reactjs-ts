@@ -10,3 +10,10 @@ export const getPostById = (payload:number) : {type:string, payload:number} =>{
         payload
     }
 } 
+
+export const addPost = (payload:{title:string, body:string}) =>{
+    return {
+        type: "ADD_POST",
+        payload
+    }
+}
