@@ -46,8 +46,10 @@ class ConnectedNewPost extends React.Component<NewPostProps, NewPostState>{
         }
     }
 
-    onClick = async () => {
-        this.props.addPost({ title: "123", body: "123" })
+    onClick = () => {
+        const {title, body} = this.state;
+
+        this.props.addPost({ title,body })
 
 
 
@@ -102,7 +104,7 @@ class ConnectedNewPost extends React.Component<NewPostProps, NewPostState>{
         return (
             <Row type="flex" justify="center" >
                 <Col >
-                    <Form style={{width:'50vh'}}>
+                    <Form style={{width:'50vh'}} >
                         <Form.Item>
                             <Input name="title" placeholder="Input title of post" allowClear onChange={this.onChange} />
 
@@ -119,7 +121,7 @@ class ConnectedNewPost extends React.Component<NewPostProps, NewPostState>{
                             />
                        </Form.Item>
                        <Form.Item>
-                       <Button type="primary" htmlType="submit" className="login-form-button">
+                       <Button type="primary" onClick={this.onClick} className="login-form-button">
                             Create post
                         </Button>
                         </Form.Item>

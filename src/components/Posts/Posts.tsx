@@ -9,14 +9,14 @@ const { Meta } = Card;
 
 // import NewPost from "../NewPost/NewPost"
 // import axios from "axios"
-interface HelloProps {
-    compiler: string;
+interface PostsProps {
+
     framework?: number;
     getPosts?: any;
     posts?: any[];
 }
 
-interface HelloState { name: string }
+interface PostsState { name: string }
 
 
 // export const Hello = (props: HelloProps) => (<h1>Hello from {props.compiler} and {props.framework}  </h1>)
@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch: any): object => {
     }
 }
 
-class connectedHello extends React.Component<HelloProps, HelloState> {
+class connectedPosts extends React.Component<PostsProps, PostsState> {
     constructor(props: any) {
         super(props)
 
@@ -95,11 +95,6 @@ class connectedHello extends React.Component<HelloProps, HelloState> {
         
 
         return (<div>
-
-            
-           
-
-            <Link href="/posts/new"><button onClick={this.onClick}>Hi</button></Link>
             <Row type="flex" justify="center">
                 <Col>
                 
@@ -136,14 +131,12 @@ class connectedHello extends React.Component<HelloProps, HelloState> {
                 }) : "No data"}
                 </Col>
             </Row>
-
-            Hello from {this.props.compiler} and {this.props.framework}
         </div>)
     }
 }
 
-const Hello = connect(mapStateToProps, mapDispatchToProps)(connectedHello)
+const Post = connect(mapStateToProps, mapDispatchToProps)(connectedPosts)
 
-export default Hello
+export default Post
 
  // <li> <Link href={`/post?id=${post.id}`} ><a>{post.title}</a></Link></li>)

@@ -1,5 +1,6 @@
 import {takeEvery, put, call} from "redux-saga/effects"
 import axios from "axios"
+import { url } from "inspector"
 const URL = "https://simple-blog-api.crew.red"
 
 export default function* watcherSaga(){
@@ -23,7 +24,16 @@ function* addPostWorker (action:{type:string, payload:{title:string, body:string
 
 const addPost = (post: {title:string, body:string}) =>{
     console.log(post);
-    
+    // let bodyFormData = new FormData();
+    // bodyFormData.append('title',post.title)
+    // bodyFormData.append('body',post.body)
+
+    // return axios({
+    //     method: 'post',
+    //     url:`${URL}/posts`,
+    //     data: bodyFormData,
+    //     headers: {"Content-Type":" application/json"}
+    // })
     return axios.post(`${URL}/posts`,{
         ...post
     })
