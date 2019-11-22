@@ -5,25 +5,32 @@ import { Provider } from "react-redux";
 import store from "../../src/store"
 import Link from 'next/link'
 import NewPost from "../../src/components/NewPost/NewPost"
+import 'antd/dist/antd.css'
+import { Layout } from 'antd';
 
-function my(): void {
-    console.log("hi");
+const { Header, Footer, Content } = Layout;
 
-}
 
 function Home() {
-    my()
+
     return (
 
-        <div>
+        
             <Provider store={store}>
                 {/* <Posts compiler="Hey"/> */}
-                <NewPost />
-                <Link href="/post?slug=133" >go to post 2</Link>
+                <Layout style={{height:'100vh'}}>
+                    <Header>Header</Header>
+                    <Content style={{display:"flex", justifyContent:"center", flexDirection:"column", alignItems:"center"}} >
+                     <NewPost />
+                    </Content>
+                    <Footer>Footer</Footer>
+                </Layout>
+                
+               
             </Provider>
 
 
-        </div>
+        
     )
 }
 

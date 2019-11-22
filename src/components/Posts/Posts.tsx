@@ -1,15 +1,22 @@
 import React from "react";
-import {connect} from "react-redux";
-import {getPosts} from "../../actions"
+import { connect } from "react-redux";
+import { getPosts } from "../../actions"
 import Link from 'next/link'
+import { Card, Icon, Avatar, Row, Col } from 'antd'
+import Router from "next/router"
+
+const { Meta } = Card;
+
 // import NewPost from "../NewPost/NewPost"
 // import axios from "axios"
-interface HelloProps {compiler: string;
-    framework?: number; 
-    getPosts?:any; 
-    posts?: any[];}
+interface HelloProps {
+    compiler: string;
+    framework?: number;
+    getPosts?: any;
+    posts?: any[];
+}
 
-interface HelloState {name:string}
+interface HelloState { name: string }
 
 
 // export const Hello = (props: HelloProps) => (<h1>Hello from {props.compiler} and {props.framework}  </h1>)
@@ -21,22 +28,22 @@ interface HelloState {name:string}
 // })
 
 // type HelloState ={name: string}
-const mapStateToProps = (state:any)=>{
-    return{
+const mapStateToProps = (state: any) => {
+    return {
         posts: state.posts
     }
 }
 
-const mapDispatchToProps = (dispatch:any):object =>{
-    
-    
+const mapDispatchToProps = (dispatch: any): object => {
+
+
     return {
         getPosts: () => dispatch(getPosts())
     }
 }
 
-class connectedHello extends React.Component<HelloProps,HelloState> {
-    constructor(props:any){
+class connectedHello extends React.Component<HelloProps, HelloState> {
+    constructor(props: any) {
         super(props)
 
         this.state = {
@@ -48,7 +55,7 @@ class connectedHello extends React.Component<HelloProps,HelloState> {
 
 
     // error(message: string): never{
-        
+
     //     throw new Error(message)
     // }
 
@@ -63,42 +70,80 @@ class connectedHello extends React.Component<HelloProps,HelloState> {
     //     this.setState({
     //         name: "OKK"
     //     })
-        
+
     // }
     // using arrow functions you don't need to bind function to this class 
-    componentDidMount = () =>{
+    componentDidMount = () => {
         this.props.getPosts()
     }
 
-    onClick = ()=>{
+    onClick = (e:any) => {
+
         
         
-        
+
     }
-    render(){
+    render() {
 
         // axios.get('https://simple-blog-api.crew.red/posts').then((response) =>{
         //     console.log(response.data);
-            
+
         // }
-            
+
         // );
-        const {posts} = this.props;
-        console.log(posts);
+        const { posts } = this.props;
         
-        return(<h1>
-            <Link href="/posts/new"><button onClick = {this.onClick}>Hi</button></Link>
-            <ul>
-                {posts !=undefined && posts.length >0 ? posts.map((post) =>{
-                    return (<li> <Link href={`/post?id=${post.id}`} ><a>{post.title}</a></Link></li>)
-                }): "No data"}
-            </ul>
+
+        return (<div>
+
             
-            Hello from {this.props.compiler} and {this.props.framework}  
-            </h1>)
+           
+
+            <Link href="/posts/new"><button onClick={this.onClick}>Hi</button></Link>
+            <Row type="flex" justify="center">
+                <Col>
+                
+            
+                {posts != undefined && posts.length > 0 ? posts.map((post) => {
+
+                    return (
+                        <Row>
+                            <Col>
+                            <Card
+                style={{ width: '50vh', marginTop: 16 }}
+                cover={
+                    <img
+                        alt="example"
+                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    />
+                }
+                actions={[
+                    // <Icon type="setting" key="setting" />,
+                    // <Icon type="edit" key="edit" />,
+                   (<Icon title="Load more" onClick={()=>{Router.push(`/post?id=${post.id}`)}} type="ellipsis" key={post.id} />),
+                ]}
+            >
+                <Meta
+                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    title={post.title}
+                    description={post.body}
+                />
+            </Card>
+                            </Col>
+                        </Row>
+                    )
+
+                }) : "No data"}
+                </Col>
+            </Row>
+
+            Hello from {this.props.compiler} and {this.props.framework}
+        </div>)
     }
 }
 
-const Hello  = connect(mapStateToProps, mapDispatchToProps)(connectedHello)
+const Hello = connect(mapStateToProps, mapDispatchToProps)(connectedHello)
 
 export default Hello
+
+ // <li> <Link href={`/post?id=${post.id}`} ><a>{post.title}</a></Link></li>)

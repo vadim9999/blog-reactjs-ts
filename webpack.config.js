@@ -17,6 +17,10 @@ module.exports = {
   },
 
   module: {
+    loaders:[{
+      test: /\.css$/,
+      loader:'style!css!'
+}],
     rules: [
 
         // we use babel-loader to load our jsx and tsx files
