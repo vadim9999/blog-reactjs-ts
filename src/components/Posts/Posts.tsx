@@ -55,6 +55,7 @@ class connectedPosts extends React.Component<PostsProps, PostsState> {
                     <Row>
                       <Col>
                         <Card
+                          key={post.id}
                           style={{ width: '50vh', marginTop: 16 }}
                           cover={
                             <img
